@@ -1,0 +1,53 @@
+/*387. First Unique Character in a String
+Easy
+
+2479
+
+129
+
+Add to List
+
+Share
+Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
+
+Examples:
+
+s = "leetcode"
+return 0.
+
+s = "loveleetcode"
+return 2.
+ 
+
+Note: You may assume the string contains only lowercase English letters.
+*/
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+    const map = {};
+    
+    const str = s;
+    for(let i = 0;i < str.length; i++) {
+        if(map[str[i]]) {
+            map[str[i]].count++;
+        } else {
+            map[str[i]] = {
+                count: 1,
+                index: i
+            }
+        }
+    }
+    
+    let firstIndex = -1;
+    
+    Object.keys(map).forEach((key) => {
+        if(map[key].count === 1 && (map[key].index < firstIndex || firstIndex === -1)) {
+           firstIndex =  map[key].index;
+        }
+    });
+    
+    return firstIndex;
+};
